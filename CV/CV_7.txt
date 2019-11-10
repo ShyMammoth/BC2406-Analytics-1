@@ -1,0 +1,14 @@
+Thesis Work — Artificial Intelligence: Robot Café Application
+Dear Volvo Construction Equipment,
+
+My name is Ivan Llopis. I am incredibly passionate about all things engineering, robotics, artificial intelligence and control systems. Over the past four years, I have dedicated a considerable amount of time and effort to control theory and robotics. Then, about two years ago, I discovered Machine Learning and Artificial Intelligence. It amazed me and I have been dedicating my education to that ever since. I have done a number of courses online, been reading a host of articles, even enrolled in two related courses this year at university. I cannot put into words how excited I am about the application of machine learning and AI to robots, and about the ways it can improve the things with can do with them.
+
+My last project at university was an implementation of ROS in a simpler version of the coffee bot you propose in this thesis work. The robot was only supposed to bring snack to certain landmarks in an office (we called it 'tables of the café') while navigating safely around obstacles. The robot used ROS, the navigation package and amcl to plan the route, and a Kinect camera to detect obstacles. The robot worked well, however, my mind is still coming up with new ideas for a more complete and advanced version of it.
+
+In order to do this, I wish to apply for the Thesis Work of Artificial Intelligence: Robot Café at Volvo Car Group. I am completely obsessed with robotics, and now that I have discovered the field of machine learning and AI, I cannot wait to put my talents at work in developing new and amazing things. As for my education, I have been working with recurrent neural networks applied to timeseries analysis and NLP, convolutional neural networks for image classification, feedforward neural networks, linear regression, reinforcement learning, decision trees and random forests, bayesian learning and clustering with k-means. The main libraries I have used in the lectures are Keras (Tensorflow), Sci-kit learn and WEKA. And of course, I have been working with ROS as well, both with navigation and with object and face recognition packages.
+
+If this is something that Volvo Group may be interested in, please do not hesitate to contact me and we will arrange a meeting. I would be really happy to hear back form you. I am a hundred percent sure that I would be a perfect match for this position.
+
+Thank you in advance and all the best to the group,
+
+Ivan Llopis
