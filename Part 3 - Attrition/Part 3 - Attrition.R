@@ -1,7 +1,7 @@
 # ==============================================================================================================
 # Part 3 : Attrition
 # ==============================================================================================================
-
+setwd('C:/Users/ooimi/Documents/BC2406')
 library(data.table)
 data<-fread("IBM HR Data.csv")
 summary(data)
@@ -9,8 +9,7 @@ summary(data)
 # ==============================================================================================================
 # Data Cleaning
 # ==============================================================================================================
-
-# Removal of meaningless data points
+# Removal of less meaningful data points
 data<-data[!data$EmployeeNumber == "TESTING",]
 data<-data[!data$EmployeeNumber == "TEST",]
 data<-data[!data$EmployeeNumber == "Test",]
@@ -65,7 +64,7 @@ data<-data[,StandardHours:=NULL]
 data<-data[,EmployeeCount:=NULL]
 
 
-# Comparing correlation of data related to Salary and JobLevel
+# Comparing correlation of data related to salary and JobLevel
 library(corrplot)
 library(RColorBrewer)
 salary<-data[, .(HourlyRate, DailyRate, MonthlyRate, MonthlyIncome, JobLevel)]
@@ -94,19 +93,20 @@ data$Attrition<-factor(data$Attrition)
 
 data1<-data.table(data)
 
-# Remove irrelevant variables
-data1<-data1[,JobSatisfaction:=NULL]
-data1<-data1[,RelationshipSatisfaction:=NULL]
-data1<-data1[,EnvironmentSatisfaction:=NULL]
+#remove irrelevant variables
 data1<-data1[,EmployeeNumber:=NULL]
 data1<-data1[,`Application ID`:=NULL]
 
 m1<-glm(Attrition ~., family = binomial, data=data1, na.action=na.omit)
 summary(m1)
-OR<-exp(coef(m1))
+
+#refitted model
+m2<-glm(Attrition ~ Age+DistanceFromHome+EnvironmentSatisfaction+JobInvolvement+JobLevel+JobSatisfaction+NumCompaniesWorked+PercentSalaryHike+RelationshipSatisfaction+StockOptionLevel+TrainingTimesLastYear+WorkLifeBalance+YearsInCurrentRole+YearsSinceLastPromotion+YearsWithCurrManager,family = binomial, data=data1, na.action=na.omit)
+summary(m2)
+OR<-exp(coef(m2))
 OR
-#OR.CI<-exp(confint(m1))
-#OR.CI 
+OR.CI<-exp(confint(m2))
+OR.CI
 
 # ==============================================================================================================
 # CART
@@ -118,7 +118,7 @@ library(rpart.plot)
 set.seed(2014)
 options(digits = 5)
 
-# Dataset
+#dataset
 data2<-data.table(data)
 #remove irrelavant variables
 data2<-data2[,Attrition:=NULL]
@@ -126,7 +126,7 @@ data2<-data2[,EmployeeNumber:=NULL]
 data2<-data2[,`Application ID`:=NULL]
 
 
-# FOR ENVIRONMENT SATISFACTION
+#FOR ENVIRONMENT SATISFACTION
 data.env<-data.table(data2)
 data.env<-data.env[,JobSatisfaction:=NULL]
 data.env<-data.env[,RelationshipSatisfaction:=NULL]
@@ -159,7 +159,9 @@ tree_table.env
 round(prop.table(tree_table.env),3)
 cat("CART Overall Accuracy Rate (EnvironmentSatisfaction): ", round(0.161+0.161+0.264+0.259,3), "\n")
 
-#FOR JOB SATISFACTION
+
+
+# FOR JOB SATISFACTION
 data.job<-data.table(data2)
 data.job<-data.job[,EnvironmentSatisfaction:=NULL]
 data.job<-data.job[,RelationshipSatisfaction:=NULL]
@@ -191,7 +193,8 @@ tree_table.job
 round(prop.table(tree_table.job),3)
 cat("CART Overall Accuracy Rate (JobSatisfaction): ", round(0.187+0.182+0.292+0.298,3), "\n")
 
-#FOR RELATIONSHIP SATISFACTION
+
+# FOR RELATIONSHIP SATISFACTION
 data.rns<-data.table(data2)
 data.rns<-data.rns[,JobSatisfaction:=NULL]
 data.rns<-data.rns[,EnvironmentSatisfaction:=NULL]
